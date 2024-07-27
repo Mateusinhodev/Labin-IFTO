@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block 'conteudo' %}
+
+    <div style="text-align: center;" class="container">
+        <h1>{{agendamento.laboratorio}}</h1>
+        <h1>{{agendamento.professor}}</h1>
+        <h1>{{agendamento.data_cadastro}}</h1>
+        <h1>{{agendamento.horario_inicio}}</h1>
+        <h1>{{agendamento.horario_fim}}</h1>
+    </div>
+    
+{% endblock  %}
