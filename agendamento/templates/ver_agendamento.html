@@ -2,12 +2,69 @@
 
 {% block 'conteudo' %}
 
-    <div style="text-align: center;" class="container">
-        <h1>{{agendamento.laboratorio}}</h1>
-        <h1>{{agendamento.professor}}</h1>
-        <h1>{{agendamento.data_cadastro}}</h1>
-        <h1>{{agendamento.horario_inicio}}</h1>
-        <h1>{{agendamento.horario_fim}}</h1>
+    <div class="container">
+        <br>
+
+        <h1 style="text-align: center;">Informações de Agendamento</h1>
+        <hr>
+        <br>
+
+        <div class="row">
+
+            <div class="col-md-3">
+
+            </div>
+    
+            <div class="col-md">
+                <form action="#" method="POST">
+                    {% csrf_token %}
+                    <label>Laboratório:</label>
+                    <br>
+                    <select class="form-control" name="laboratorio">
+                        {% for i in laboratorio %}
+                            {% if agendamento.laboratorio.nome == i.nome %}
+                                <option selected>{{i}}</option>
+                            {% else %}
+                                <option >{{i}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    <br>
+                    <label>Professor:</label>
+                    <br>
+                        <select class="form-control" name="professor">
+                            {% for i in professor %}
+                                {% if agendamento.professor.nome == i.nome %}
+                                <option selected>{{i}}</option>
+                                {% else %}
+                                    <option>{{i}}</option>
+                                {% endif %}
+                            {% endfor %}     
+                        </select>
+                    <br>
+                    <label>Data de agendamento:</label>
+                    <input class="form-control" type="text" value="{{agendamento.data_agendamento}}">
+                    <br>
+                    <label>Horário:</label>
+                    <div style="display: flex;">
+                        <label>Inicio da aula: </label>
+                        <input style="width: 15%; margin: 0 20px;" class="form-control" type="text" value="{{agendamento.horario_inicio}}">
+                        <label>Final da aula: </label>
+                        <input style="width: 15%; margin: 0 20px;" class="form-control" type="text" value="{{agendamento.horario_fim}}">
+                    </div>
+        
+                    <br>
+                    
+                    <input type="submit" class="btn btn-success btn-lg" value="Salvar">
+                </form>
+            </div>
+    
+            <div class="col-md-3">
+    
+            </div>
+
+        </div>
+
     </div>
     
 {% endblock  %}
