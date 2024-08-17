@@ -37,7 +37,7 @@ def agendamento_aula(request):
         form = AgendamentoAula(request.POST)
         if form.is_valid:
             form.save()
-            return HttpResponse('Livro salvo com sucesso')
+            return redirect('/agendamento/home')
         else:
             return HttpResponse('Dados Inválidos')
         # laboratorio = form.data['laboratorio']
