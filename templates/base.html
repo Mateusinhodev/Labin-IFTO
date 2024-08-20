@@ -13,19 +13,22 @@
     <title>{% block 'titulo' %}{% endblock %}</title>
   </head>
   <body>
-
-    <nav class="navbar navbar-success bg-success">
-        <a class="navbar-brand text-white" href="{% url 'home' %}">
-          <img src="/docs/4.6/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-           Labin IFTO
-        </a>   
-        {% if usuario_logado %}
-          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
-            Agendar aula
-          </button>     
-          <a href="{% url 'sair' %}" class="btn btn-danger">Sair</a>
-        {% endif %}
+    
+      <nav class="navbar navbar-success bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="{% url 'home' %}">
+                <img src="/docs/4.6/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                Labin IFTO
+            </a>   
+            {% if usuario_logado %}
+              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
+                Agendar aula
+              </button>
+              <a href="{% url 'sair' %}" class="btn btn-danger">Sair</a>
+            {% endif %}
+        </div>
       </nav>
+
 
       {% if usuario_logado %}
         <!-- Modal de Formulário para Agendamento de Aula -->
