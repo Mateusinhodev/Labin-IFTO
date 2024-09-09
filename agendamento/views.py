@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from usuarios.models import Usuario
 from .models import Agendamentos, Laboratorios, Professores
 from .forms import AgendamentoAula
+from .serializers import AgendamentoSerializer
+from rest_framework import viewsets
 
 # É onde encontra se toda a lógica do sistema.
 
@@ -45,3 +47,7 @@ def agendamento_aula(request):
         # data_agendamento = form.data['data_agendamento']
         # horario_inicio = form.data['horario_inicio']
         # horario_fim = form.data['horario_fim']
+
+class AgendamentoViewSet(viewsets.ModelViewSet):
+    queryset = Agendamentos.objects.all()
+    serializer_class = AgendamentoSerializer
