@@ -1,46 +1,69 @@
-# Arquitetura do DJANGO
+# Sistema de Controle de Acesso aos Laboratórios - IFTO Campus Colinas
 
-## Criar venv
-    > python -m venv venv
+Este é um sistema web desenvolvido para gerenciar o controle de acesso aos laboratórios da faculdade IFTO Campus Colinas. O sistema permite agendar o uso dos laboratórios, registrar horários e monitorar o acesso dos usuários. O projeto foi desenvolvido utilizando **Python** e o framework **Django**, contando também com uma API para integração com outros sistemas.
 
-## Ativar venv 
-    > .\venv\Scripts\Activate
+## Funcionalidades
 
-## Selecionar interpretador
-    -> CTRL/SHIFT/P
-    -> Pesquisar por: "python select" e selecione a que tem nossa venv e está marcada como "Recomendada"
+- **Cadastro de usuários**: Permite o registro de usuários, como adminitrador do sistema.
+- **Agendamento de Laboratórios**: Adminitrador do sistema pode agendar o uso dos laboratórios, especificando qual o laboratório desejável, o nome professor, data e horário de inicio e fim de aula .
+- **Monitoramento de Acessos**: Registra os acessos aos laboratórios para controle e segurança.
+- **API REST**: Disponibiliza uma API para integrar o sistema com outras plataformas e aplicativos.
 
-## Instalar Django, Rest_Framework e Corsheaders
-    
+## Tecnologias Utilizadas
 
-## API_ROOT
-    + settings.py - Configurações gerais
-    + urls.py - Linkar aplicação 
+- **Python**: Linguagem principal utilizada no backend.
+- **Django**: Framework web utilizado para desenvolver o sistema.
+- **Django Rest Framework (DRF)**: Utilizado para a criação da API.
+- **SQLite**  Banco de dados para armazenar os dados do sistema.
+- **Bootstrap**: Framework CSS para tornar a interface responsiva.
 
-## API_REST
-    + models.py - Criar modelos para o banco de dados
-    + admin.py - Configurar edição de modelos (opcional)
-    + serializers.py - Gerar JSON's dos modelos
-    + views.py - Funções da API
-    + urls.py - Linkar funções
+## Requisitos
 
-### /settings.py
-    + Adicionar ao INSTALLED_APPS
-        + rest_framework
-        + corsheaders
-        + api_rest
+- Python 
+- Django
+- Django Rest Framework
+- Banco de dados SQLite
 
-    + Adicionar ao MIDDLEWARE
-        + corsheaders.middleware.CorsMiddleware
+## Instalação
 
-    + Criar um CORS_ALLOW_ORIGINS
-        CORS_ALLOW_ORIGINS = [
-           'http://localhost:8000', 
-        ]
-        
-        + Artenativa:
-            + CORS_ORIGINS_ALLOW = True
+1. Clone o repositório:
 
-### /models.py
+    ```bash
+    git clone https://github.com/Mateusinhodev/Labin-IFTO.git
+    cd Labin-IFTO
+    ```
 
-### /admin.py
+2. Crie e ative um ambiente virtual:
+
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # Para Linux/Mac
+    venv\Scripts\activate  # Para Windows
+    ```
+
+3. Instale as dependências:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4. Realize as migrações do banco de dados:
+
+    ```bash
+    python manage.py migrate
+    ```
+
+5. Inicie o servidor de desenvolvimento:
+
+    ```bash
+    python manage.py runserver
+    ```
+
+## Uso da API
+
+A API oferece endpoints para o controle de agendamentos e acessos aos laboratórios. Ela pode ser utilizada para integrar o sistema a outras plataformas.
+
+### Exemplos de Endpoints
+
+- `GET /agendamento/agendamentos/`: Cria um novo agendamento de laboratório.
+- `GET /api/agendamentos/id/`: Detalha um agendamento específico.
