@@ -16,15 +16,22 @@
     
       <nav class="navbar navbar-success bg-success">
         <div class="container-fluid">
+            {% load static %}
             <a class="navbar-brand text-white" href="{% url 'home' %}">
-                <img src="/docs/4.6/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                <img src="{% static 'img/logoifto.webp'%}" width="30" height="30" class="d-inline-block align-top" alt="">
                 Labin IFTO
             </a>   
             {% if usuario_logado %}
-              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
-                Agendar aula
-              </button>
-              <a href="{% url 'sair' %}" class="btn btn-danger">Sair</a>
+              <div class="btn-group">
+                <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Menu
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <button class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModal">Agendar aula</button>
+                  <div class="dropdown-divider"></div>
+                  <a href="{% url 'sair' %}" class="dropdown-item" type="button">Sair</a>
+                </div>
+              </div>
             {% endif %}
         </div>
       </nav>

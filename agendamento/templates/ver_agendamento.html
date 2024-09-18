@@ -2,6 +2,23 @@
 
 {% block 'conteudo' %}
 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Deseja mesmo exlcuir?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <a href="{% url 'excluir_agendamento' id_agendamento %}" class="btn btn-danger ">Excluir</a>
+            </div>
+        </div>
+        </div>
+    </div>
+
     <div class="container">
         <br>
 
@@ -16,8 +33,10 @@
             </div>
     
             <div class="col-md">
-                <form action="#" method="POST">
+                <form action="" method="POST">
                     {% csrf_token %}
+                    <input type="hidden" value="{{agendamento.id}}" name="agendamento_id">
+
                     <label>Laboratório:</label>
                     <br>
                     <select class="form-control" name="laboratorio">
@@ -43,19 +62,24 @@
                         </select>
                     <br>
                     <label>Data de agendamento:</label>
-                    <input class="form-control" type="text" value="{{agendamento.data_agendamento}}">
+                    <input class="form-control" type="text" value="{{agendamento.data_agendamento}}" name="data_agendamento">
                     <br>
                     <label>Horário:</label>
                     <div style="display: flex;">
                         <label>Inicio da aula: </label>
-                        <input style="width: 15%; margin: 0 20px;" class="form-control" type="text" value="{{agendamento.horario_inicio}}">
+                        <input style="width: 15%; margin: 0 20px;" class="form-control" type="text" value="{{agendamento.horario_inicio}}" name="inicio_aula">
                         <label>Final da aula: </label>
-                        <input style="width: 15%; margin: 0 20px;" class="form-control" type="text" value="{{agendamento.horario_fim}}">
+                        <input style="width: 15%; margin: 0 20px;" class="form-control" type="text" value="{{agendamento.horario_fim}}" name="final_aula">
                     </div>
         
                     <br>
-                    
-                    <input type="submit" class="btn btn-success btn-lg" value="Salvar">
+
+                    <div>
+                        <input type="submit" class="btn btn-success btn-lg" value="Salvar">
+                        <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#exampleModal2">
+                            Excluir
+                        </button>
+                    </div>
                 </form>
             </div>
     
