@@ -6,13 +6,13 @@
 
     <div class="row">
         {% for agendamento in agendamentos %}
-        <div class="col-md-3">
+        <div class="col-md-4">
             <br>
-            <div class="card bg-light mt-3" style="max-width: 16rem;">
+            <div class="card bg-light mt-3" style="max-width: 20rem;">
                 <div class="card-header">{{agendamento.laboratorio}}</div>
                 <div class="card-body">
                   <h6 class="card-title">Professor: {{agendamento.professor}}</h6>
-                  <p class="card-text">Data: {{agendamento.data_agendamento}} <br> Horário: {{agendamento.horario_inicio}} - {{agendamento.horario_fim}}</p>
+                  <p class="card-text">Data: {{agendamento.data_agendamento|date:"d/m/Y"}} <br> Horário: {{agendamento.horario_inicio}} - {{agendamento.horario_fim}}</p>
                 </div>
                 <a href="{% url 'ver_agendamento' agendamento.id %}" class="btn btn-success">Acessar</a>
             </div>

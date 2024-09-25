@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from usuarios.models import Usuario
 from .models import Agendamentos, Laboratorios, Professores
@@ -55,33 +55,36 @@ def excluir_agendamento(request, id):
     agendamento = Agendamentos.objects.get(id = id).delete()
     return redirect('/agendamento/home')
 
-# def editar_agendamento(request):
-#     agendamento_id = request.POST.get('agendamento_id')
-#     laboratorio = request.POST.get('laboratorio')
-#     professor = request.POST.get('professor')
-#     data_agendamento = request.POST.get('data_agendamento')
-#     inicio_aula = request.POST.get('inicio_aula')
-#     final_aula = request.POST.get('final_aula')
+def editar_agendamento(request):
+    agendamento_id = request.POST.get('agendamento_id')
+    laboratorio_id = request.POST.get('laboratorio')
+    professor_id = request.POST.get('professor')
+    data_agendamento = request.POST.get('data_agendamento')
+    inicio_aula = request.POST.get('inicio_aula')
+    final_aula = request.POST.get('final_aula')
 
-#     # Converte a data_agendamento de string para datetime no formato 'YYYY-MM-DD'
-#     try:
-#         data_agendamento = datetime.strptime(data_agendamento, '%Y-%m-%d').date()
-#     except ValueError:
-#         # Lida com erro de formato de data, caso o usuário insira uma data inválida
-#         return HttpResponse("Data inválida, por favor insira no formato YYYY-MM-DD")
+    # Converte a data_agendamento de string para datetime no formato 'YYYY-MM-DD'
+    try:
+        data_agendamento = datetime.strptime(data_agendamento, '%d/%m/%Y').date()
+    except ValueError:
+        # Lida com erro de formato de data, caso o usuário insira uma data inválida
+        return HttpResponse("Data inválida, por favor insira no formato DD-MM-YYYY")
 
-#     agendamento = Agendamentos.objects.get(id = agendamento_id)
-#     laboratorio = Laboratorios.objects.all()
-#     professor = Professores.objects.all()
+    # Busca o agendamento pelo ID ou retorna 404 se não encontrado
+    agendamento = get_object_or_404(Agendamentos, id = agendamento_id)
 
-#     laboratorio.nome = laboratorio
-#     professor.nome = professor
-#     agendamento.data_agendamento = data_agendamento
-#     agendamento.horario_inicio = inicio_aula
-#     agendamento.horario_fim = final_aula
-#     agendamento.save()
+    # Busca o laboratório e o professor pelos IDs fornecidos no select
+    laboratorio = get_object_or_404(Laboratorios, id = laboratorio_id)
+    professor = get_object_or_404(Professores, id = professor_id)
 
-#     return redirect('/agendamento/ver_agendamento/{agendamento_id}')
+    agendamento.laboratorio = laboratorio
+    agendamento.professor = professor
+    agendamento.data_agendamento = data_agendamento
+    agendamento.horario_inicio = inicio_aula
+    agendamento.horario_fim = final_aula
+    agendamento.save()
+
+    return redirect('/agendamento/home')
 class AgendamentoViewSet(viewsets.ModelViewSet):
     queryset = Agendamentos.objects.all()
     serializer_class = AgendamentoSerializer

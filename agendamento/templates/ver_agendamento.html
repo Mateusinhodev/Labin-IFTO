@@ -33,7 +33,7 @@
             </div>
     
             <div class="col-md">
-                <form action="" method="POST">
+                <form action="{% url 'editar_agendamento' %}" method="POST">
                     {% csrf_token %}
                     <input type="hidden" value="{{agendamento.id}}" name="agendamento_id">
 
@@ -41,11 +41,9 @@
                     <br>
                     <select class="form-control" name="laboratorio">
                         {% for i in laboratorio %}
-                            {% if agendamento.laboratorio.nome == i.nome %}
-                                <option selected>{{i}}</option>
-                            {% else %}
-                                <option >{{i}}</option>
-                            {% endif %}
+                            <option value="{{i.id}}" {%if agendamento.laboratorio.id == i.id %}selected {% endif %}>
+                                {{i.nome}}
+                            </option>
                         {% endfor %}
                     </select>
                     <br>
@@ -53,16 +51,14 @@
                     <br>
                         <select class="form-control" name="professor">
                             {% for i in professor %}
-                                {% if agendamento.professor.nome == i.nome %}
-                                <option selected>{{i}}</option>
-                                {% else %}
-                                    <option>{{i}}</option>
-                                {% endif %}
-                            {% endfor %}     
+                                <option value="{{i.id}}" {%if agendamento.professor.id == i.id %}selected {% endif %}>
+                                    {{i.nome}}
+                                </option>
+                            {% endfor %}   
                         </select>
                     <br>
                     <label>Data de agendamento:</label>
-                    <input class="form-control" type="text" value="{{agendamento.data_agendamento}}" name="data_agendamento">
+                    <input class="form-control" type="text" value="{{agendamento.data_agendamento|date:"d/m/Y"}}" name="data_agendamento">
                     <br>
                     <label>Horário:</label>
                     <div style="display: flex;">
