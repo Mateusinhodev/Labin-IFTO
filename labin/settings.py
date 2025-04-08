@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'agendamento',
     'usuarios',
     'rest_framework',
-
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
