@@ -3,6 +3,7 @@ from django.urls import path, include, re_path
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from django.views.generic import RedirectView
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -31,4 +32,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('agendamento/', include('agendamento.urls')),
     path('auth/', include('usuarios.urls')),
+
+    path('', RedirectView.as_view(url='/auth/login', permanent=False)),
 ]
